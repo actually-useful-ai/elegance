@@ -1,6 +1,6 @@
 ---
 name: elegance
-description: "Deep code refinement — find cruft, duplication, conflicts, and elegant solutions. Usage: /elegance [path] — analyzes target path or recent changes if no path given."
+description: "Find the version of your code that was always meant to be written. Usage: /elegance [path]"
 arguments:
   - name: path
     description: "File or directory to analyze (optional — defaults to recent git changes)"

@@ -1,6 +1,6 @@
 # elegance
 
-Deep code refinement for Claude Code. Finds cruft, duplication, CSS/JS conflicts, and elegant solutions — then seeks confirmation before every change.
+Code refinement plugin for Claude Code. Looks past surface-level cleanup to find the version of your code that feels inevitable.
 
 ## Install
 
@@ -11,37 +11,43 @@ Deep code refinement for Claude Code. Finds cruft, duplication, CSS/JS conflicts
 ## Usage
 
 ```
-/elegance              # analyze recent git changes
-/elegance src/         # analyze a specific directory
-/elegance app.tsx      # analyze a specific file
+/elegance              # look at recent git changes
+/elegance src/         # focus on a directory
+/elegance app.tsx      # focus on a single file
 ```
 
-## What it does
+## How it works
 
-Six analysis passes, three levels of findings:
+Six passes over your code, each looking for something different:
 
-### Passes
-1. **Cruft scan** — dead code, unused imports, orphan files, stale TODOs
-2. **Duplication audit** — copy-pasted logic, repeated CSS/JS patterns, near-identical components
-3. **Conflict detection** — CSS specificity wars, competing event handlers, z-index battles, state duplication
-4. **First-principles rethink** — complex logic distilled to its essence
-5. **Shared component extraction** — reusable patterns hiding across the codebase
-6. **Elegance search** — find the "aha" solution via web search for well-regarded patterns
+1. **Cruft** -- dead code, unused imports, orphan files, stale TODOs
+2. **Duplication** -- copy-pasted logic, repeated CSS/JS patterns, near-identical components
+3. **Conflicts** -- CSS specificity fights, competing event handlers, z-index chaos, duplicate state
+4. **First principles** -- complex logic boiled down: "what is this actually trying to do?"
+5. **Shared components** -- patterns that show up in multiple places and want to be one thing
+6. **Elegance** -- the interesting part: searching for the solution that makes you think "of course"
 
-### Finding levels
-- **Elegant** — the rewrite that makes someone say "oh, that's beautiful"
-- **Simplify** — works but harder than it needs to be
-- **Cruft** — shouldn't be there at all
+Every finding gets a level:
 
-Every proposed change is presented with before/after and rationale. Nothing is changed without your explicit confirmation.
+- **elegant** -- a rewrite that makes you pause and appreciate it
+- **simplify** -- it works, but it's working too hard
+- **cruft** -- shouldn't be here
 
-## Components
+Nothing changes without your say-so. Each finding shows what's there now, what it could look like, and why. You confirm before anything is touched.
 
-| Component | Type | Purpose |
-|-----------|------|---------|
-| `/elegance` | Command | Entry point with optional path argument |
-| `elegance` | Skill | Interactive refinement flow with confirmation |
-| `elegance-analyzer` | Agent | Background codebase scanning |
+## What's in the box
+
+| What | Type | Does |
+|------|------|------|
+| `/elegance` | Command | Run it with an optional path |
+| `elegance` | Skill | The interactive review loop |
+| `elegance-analyzer` | Agent | Heavy scanning runs in the background |
+
+## Examples
+
+A 47-line validation function that's really `zod.object({...}).parse()`. Three card components that differ by an icon and a color. CSS that sets `font-weight: 600` in nine different places instead of using a variable. A nested ternary that reads better as an object lookup.
+
+These are the kinds of things elegance finds -- and for each one, it looks for the version that makes the code feel like it was always meant to be written that way.
 
 ## License
 

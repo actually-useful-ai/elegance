@@ -1,11 +1,11 @@
 ---
 name: elegance
-description: "Deep code refinement — finds cruft, duplication, conflicts, and shared component opportunities, then searches for the elegant 'aha' solution. Use when reviewing code quality, refactoring, cleaning up a codebase, or when the user asks to simplify, deduplicate, or improve code. Seeks confirmation before all changes."
+description: "Code refinement that goes past cleanup to find the version that feels inevitable. Use when reviewing code quality, refactoring, cleaning up, or when someone asks to simplify, deduplicate, or improve code. Confirms before every change."
 ---
 
-# Elegance — Code Refinement
+# Elegance
 
-Find the beautiful solution hiding inside messy code. Not just cleanup — transformation.
+Find the version of the code that was always meant to be written.
 
 <HARD-GATE>
 NEVER make changes without presenting them first and getting explicit user confirmation. Show the before, show the after, explain WHY the new version is better. Every proposed change must be confirmed.
@@ -13,12 +13,12 @@ NEVER make changes without presenting them first and getting explicit user confi
 
 ## Philosophy
 
-Good code isn't just correct — it's inevitable. When you read elegant code, you think "of course, what else could it be?" Your job is to find that version of the code.
+When you read good code, you don't think "that's clever." You think "of course." Your job is to find that version.
 
-Three levels of finding:
-- **Cruft** — things that shouldn't be there (dead code, unused imports, orphan files)
-- **Simplify** — things that work but are harder than they need to be (duplication, over-engineering, CSS wars)
-- **Elegant** — the rewrite that makes someone say "oh, that's beautiful" (a 50-line function that's really a 3-line reduce, a shared component that unifies three similar ones)
+Three levels:
+- **Cruft** -- shouldn't be here (dead code, unused imports, orphan files)
+- **Simplify** -- works, but working too hard (duplication, over-engineering, CSS fights)
+- **Elegant** -- the rewrite that makes you pause (a 50-line function that's really a 3-line reduce, three components that want to be one)
 
 ## Process
 
@@ -63,12 +63,12 @@ For any complex logic (> 15 lines doing one conceptual thing):
 - Layout patterns that repeat across pages/views
 
 ### Pass 6: Elegance Search
-This is the exciting one. For each significant finding from passes 1-5:
-- Search the web for highly-regarded solutions to the same problem (look for terms like "elegant", "clean", "beautiful", "clever", "simple" associated with the pattern)
-- Check if the language/framework has an idiomatic way to express this
-- Look for well-known design patterns that fit
-- Consider: does a library/utility already solve this perfectly?
-- The goal: find the solution that makes the reader think "of course"
+The interesting part. For each significant finding from passes 1-5:
+- Search for well-regarded solutions to the same problem (look for "elegant", "idiomatic", "clean" alongside the pattern)
+- Check if the language or framework already has a way to do this
+- Look for design patterns that fit naturally
+- Consider whether a library solves this exactly
+- The test: does it make the reader think "of course"?
 
 ## Presenting Findings
 
@@ -107,15 +107,15 @@ Within each level, sort by impact (most improvement first).
 - If the user disagrees with a finding, skip it — don't argue
 - After applying changes, show a brief summary of what was changed
 
-## What Makes a Finding "Elegant"
+## What makes a finding "elegant"
 
-An elegant finding isn't just shorter code. It's code where:
-- The intent is immediately obvious
-- There's no unnecessary ceremony
-- It uses the language/framework the way it was designed to be used
-- Someone reading it learns something
-- It makes adjacent code simpler too (cascade effect)
-- It feels inevitable — "what else could it be?"
+Not just shorter. Elegant code is where:
+- The intent is obvious on first read
+- There's no ceremony
+- It uses the tools the way they were meant to be used
+- Reading it teaches you something
+- It makes the code around it simpler too
+- It feels like the only way to write it
 
 ## Scope
 
