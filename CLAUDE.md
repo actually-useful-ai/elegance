@@ -21,6 +21,8 @@ agents/
   elegance-duplication.md              # Pass 2 (parallel group B)
   elegance-conflicts-rethink.md        # Pass 3 + 4 (parallel group C)
   elegance-analyzer.md                 # Pass 5 synthesis (sequential, after A+B+C)
+scripts/
+  elegance-ui.sh                       # CLI banners, pass headers, scoreboard, finding markers
 ```
 
 ## Architecture

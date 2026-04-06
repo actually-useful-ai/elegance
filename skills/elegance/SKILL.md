@@ -13,32 +13,22 @@ NEVER make changes without presenting them first and getting explicit user confi
 
 ## Banners
 
-Print these at key moments using the Bash tool. They make the passes visible and the work trustworthy.
+Use `scripts/elegance-ui.sh` for all visual output. Find the script relative to the plugin root. Run via the Bash tool at key moments:
 
-**Session start:**
 ```bash
-printf '\n\033[1;35m  ◆ elegance\033[0m  \033[2m%s\033[0m\n' "4 files · recent changes"
-printf '\033[35m  ─────────────────────────────\033[0m\n\n'
-```
-Replace the scope text with the actual file count and scope. Keep it simple — no box-drawing math.
-
-**Pass header** (print before each agent dispatch or inline pass):
-```bash
-printf '\033[35m  ── pass %s ──\033[0m\n' "0+1 · contract + cruft"
+UI="$(find ~/.claude/plugins -path '*/elegance/scripts/elegance-ui.sh' 2>/dev/null | head -1)"
 ```
 
-**Pass complete** (print when an agent returns):
-```bash
-printf '\033[35m  ── pass %s · %d findings ──\033[0m\n' "0+1" 3
-```
+**Session start:** `bash "$UI" start "4 files · recent changes"`
+**Pass dispatching:** `bash "$UI" pass "0+1 · contract + cruft"`
+**Pass complete:** `bash "$UI" done "0+1 · contract + cruft" 3`
+**Scoreboard:** `bash "$UI" score 2 3 1`
+**Finding header:** `bash "$UI" finding elegant "47-line validator → zod schema"`
+**Session mgmt:** `bash "$UI" session begin` / `checkpoint` / `conclude`
+**Prefs summary:** `bash "$UI" prefs "confirm-each" "gemini,codex" "recent"`
+**Session summary:** `bash "$UI" summary 12 6 4 "8m"`
 
-**Scoreboard** (print after all passes, before presenting findings):
-```bash
-printf '\n\033[35m  ─────────────────────────────\033[0m\n'
-printf '  \033[31m%d cruft\033[0m · \033[33m%d simplify\033[0m · \033[32m%d elegant\033[0m\n' 2 3 1
-printf '\033[35m  ─────────────────────────────\033[0m\n\n'
-```
-Replace counts with actuals. No box-drawing — just clean dividers.
+Locate the script once at the start and reuse the path. Replace placeholder values with actuals.
 
 ## Preferences
 
