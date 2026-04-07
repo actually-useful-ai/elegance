@@ -1,63 +1,93 @@
 ---
-name: dinner-party
-description: "Multi-agent adversarial debate — 14 specialized agents with opposing optimization targets argue toward better code decisions. Structured dissent, parallel analysis, facts before opinions."
+name: elegance
+description: "Code refinement and multi-agent adversarial debate. Pass a file path for deep code analysis, or a question for council debate with 14 specialized agents. Confirms before every change."
 allowed-tools: Read, Grep, Glob, Bash, Agent, WebSearch, WebFetch
 ---
 
-# The Dinner Party
+# Elegance
 
-A council of agents with opposing optimization targets analyzes your question from genuinely different perspectives. Facts before opinions. Dissent preserved.
+Find the version that was always meant to be written.
 
-## Protocol
+<HARD-GATE>
+NEVER make changes without presenting them first and getting explicit user confirmation. Show the before, show the after, explain WHY the new version is better. Every proposed change must be confirmed.
+</HARD-GATE>
 
-### Phase 1: Framing (Governance)
+## Smart Routing
 
-Read the user's question and:
+Elegance has two modes. The input determines which runs:
+
+### Mode 1: Code Refinement (file path or no args)
+
+**Triggers:** `/elegance src/`, `/elegance app.tsx`, `/elegance` (no args = recent git changes)
+
+Run the elegance-analyzer agent for 5-pass code scanning (contract extraction, cruft, duplication, conflicts, first-principles rethink, elegance synthesis). Present findings interactively with confirmation.
+
+**Size gate:**
+- **< 5 files:** Analyze inline, no agent needed
+- **5+ files:** Launch @elegance-analyzer in background, present findings when complete
+
+**Process:** Same as v1 — scan, rank by impact x confidence, present one finding at a time, confirm before applying, run tests after each change.
+
+### Mode 2: Council Debate (question or decision)
+
+**Triggers:** `/elegance "Should we rewrite this auth module?"`, `/elegance "What's the best approach for real-time updates?"`
+
+Convene the council — multiple agents with opposing optimization targets analyze the question in parallel, debate, and produce a synthesis with dissenting opinions preserved.
+
+**Detection:** If the input is quoted text, contains a question mark, or clearly isn't a file path — it's a council question.
+
+---
+
+## Council Protocol (Mode 2)
+
+### Phase 1: Framing
+
+Display banner, then:
 
 1. **Restate the decision** in one sentence
 2. **Define acceptance criteria** — what would a good answer include?
-3. **Select domain guests** by checking the question against these triggers:
-   - **Conscience** (accessibility): UI, frontend, components, forms, navigation, buttons, inputs, modals, touch, screen reader
-   - **Radiance** (data visualization): charts, graphs, D3, dashboard, plots, maps, choropleths, visual data
-   - **Cadence** (embedded/firmware): Arduino, ESP32, Raspberry Pi, firmware, IoT, sensors, GPIO, I2C, MQTT, microcontroller
-4. **Announce the table** — list seated guests and the question they're answering
+3. **Select domain guests** by checking triggers:
+   - **@conscience** (accessibility): UI, frontend, components, forms, navigation, buttons, inputs, modals, touch, screen reader
+   - **@radiance** (data visualization): charts, graphs, D3, dashboard, plots, maps, choropleths
+   - **@cadence** (embedded/firmware): Arduino, ESP32, Raspberry Pi, firmware, IoT, sensors, GPIO, I2C, MQTT
+4. **Announce the table** — list seated guests
 
-When in doubt, seat the domain guest. A silent agent wastes tokens; a missing perspective wastes decisions.
+When in doubt, seat the domain guest.
 
 ### Phase 2: Fact-Finding (parallel)
 
-Launch **two agents in parallel** — facts before opinions:
+Launch two agents in parallel — facts before opinions:
 
-- **Reconnaissance** — maps what exists in the codebase (inward)
-- **Brilliance** — finds praised external implementations (outward)
+- **@reconnaissance** — maps what exists in the codebase
+- **@brilliance** — finds praised external implementations
 
-Wait for both to complete. Do not proceed to Phase 3 until facts are gathered.
+Wait for both to complete before Phase 3.
 
 ### Phase 3: Analysis (parallel)
 
-Launch **all remaining seated agents in parallel**, providing fact-finding results as context. Each agent must produce findings in this format:
+Launch all remaining seated agents in parallel with fact-finding results. Each agent produces:
 
 ```
-- **Claim**: [one sentence — what they assert]
-- **Mechanism**: [how/why — the reasoning, with code or specifics]
-- **Risks**: [what could go wrong with their position]
-- **Evidence**: [what supports the claim — code refs, sources, logic]
+- **Claim**: [one sentence]
+- **Mechanism**: [how/why, with code or specifics]
+- **Risks**: [what could go wrong]
+- **Evidence**: [code refs, sources, logic]
 ```
 
-Core agents in this phase:
-- **Vigilance** — attacks proposals, finds failure modes
-- **Defiance** — challenges the emerging consensus (must always dissent)
-- **Resilience** — designs recovery for failure modes
-- **Provenance** — checks licensing, attribution, citations
-- **Elegance** — proposes the refined rewrite (only refines, doesn't propose from scratch)
-- **Assurance** — designs verification strategy (how do we prove it works?)
-- **Coherence** — assesses architecture fit (does it belong?)
+Core agents:
+- **@vigilance** — attacks proposals, finds failure modes
+- **@defiance** — challenges the emerging consensus (must always dissent)
+- **@resilience** — designs recovery for failure modes
+- **@provenance** — checks licensing, attribution
+- **@elegance-analyzer** — proposes the refined rewrite (only refines surviving proposals)
+- **@assurance** — designs verification strategy
+- **@coherence** — assesses architecture fit
 
-Plus any seated domain guests (Conscience, Radiance, Cadence).
+Plus any seated domain guests (@conscience, @radiance, @cadence).
 
-### Phase 4: Synthesis (Governance)
+### Phase 4: Synthesis
 
-Score findings against this rubric:
+Score findings against rubric:
 
 | Criterion | Weight |
 |-----------|--------|
@@ -68,22 +98,20 @@ Score findings against this rubric:
 | Maintainability | 15% |
 | User impact | 10% |
 
-Then produce the output (see Output Format below).
-
-After synthesis, pass to **Eloquence** for humanization (post-verdict only).
+Produce output, then pass to **@eloquence** for humanization (post-verdict only).
 
 ## Protocol Rules
 
 1. **Facts outrank precedent. Precedent outranks taste.**
 2. **Every criticism must include a concrete failure mode.** Unsupported objections expire.
 3. **Defiance must always dissent.** Names the strongest counterargument even when consensus is correct.
-4. **Elegance only refines surviving proposals.** It doesn't propose from scratch.
+4. **Elegance-analyzer only refines surviving proposals.**
 5. **Eloquence is post-verdict only.** Never influences the decision.
 6. **No agent speaks twice until all activated agents have spoken once.**
 7. **Brilliance must explain why a pattern transfers**, not just that it's popular.
-8. **Dissenting opinions are always preserved.** Governance never flattens disagreement into false consensus.
+8. **Dissenting opinions are always preserved.** Never flatten disagreement into false consensus.
 
-## Output Format
+## Council Output Format
 
 ```markdown
 ## Decision: [one-line summary]
@@ -116,29 +144,47 @@ After synthesis, pass to **Eloquence** for humanization (post-verdict only).
 [What was considered and why it lost]
 ```
 
-## Size Gate
+## Code Refinement Output Format (Mode 1)
 
-- **Simple questions** (< 3 files affected): Governance may skip Brilliance and run a lighter protocol
-- **Complex questions** (architecture, multi-file, cross-system): full protocol with all phases
-- **Domain questions**: always seat the relevant domain guest regardless of size
+```markdown
+### [area/file] — [finding title]
 
-## Agent Definitions
+**Level:** cruft | simplify | elegant
+**Impact:** high | medium | low
+**Confidence:** high | medium | low
+**Risk:** low | medium | high
 
-All agent definitions are in the `agents/` directory. Each is a standalone markdown file under 2,000 tokens defining the agent's role, methodology, and output format.
+**What I found:** [current state]
+**Why it matters:** [what's wrong or opportunity]
+**Proposed change:** [before/after]
+**Contract check:** [how rewrite preserves behavior]
 
-| Agent | File | Phase | Role |
-|-------|------|-------|------|
-| Governance | `governance.md` | 1, 4 | Orchestrator, synthesis |
-| Reconnaissance | `reconnaissance.md` | 2 | Inward fact-finding |
-| Brilliance | `brilliance.md` | 2 | Outward fact-finding |
-| Vigilance | `vigilance.md` | 3 | Adversarial attack |
-| Defiance | `defiance.md` | 3 | Structured dissent |
-| Resilience | `resilience.md` | 3 | Error recovery |
-| Provenance | `provenance.md` | 3 | Attribution, licensing |
-| Elegance | `elegance.md` | 3 | Code refinement |
-| Assurance | `assurance.md` | 3 | Testing, verification |
-| Coherence | `coherence.md` | 3 | Architecture fit |
-| Eloquence | `eloquence.md` | Post | Humanization |
-| Conscience | `conscience.md` | 3 (domain) | Accessibility |
-| Radiance | `radiance.md` | 3 (domain) | Data visualization |
-| Cadence | `cadence.md` | 3 (domain) | Embedded/firmware |
+**Apply this change? (y/n)**
+```
+
+## Confirmation Protocol (Mode 1)
+
+- Present one finding at a time
+- Wait for explicit confirmation before ANY edit
+- "Apply all" or "yes to all" allows batch-applying
+- If user disagrees, skip — don't argue
+- After applying: run tests if they exist, report pass/fail
+
+## Agents
+
+| Agent | Color | Phase | Role |
+|-------|-------|-------|------|
+| @elegance-analyzer | magenta | Mode 1 / Phase 3 | 5-pass code refinement |
+| @governance | yellow | Phase 1, 4 | Orchestrator, synthesis |
+| @reconnaissance | blue | Phase 2 | Inward fact-finding |
+| @brilliance | cyan | Phase 2 | Outward fact-finding |
+| @vigilance | red | Phase 3 | Adversarial attack |
+| @defiance | magenta | Phase 3 | Structured dissent |
+| @resilience | green | Phase 3 | Error recovery |
+| @provenance | white | Phase 3 | Attribution, licensing |
+| @assurance | yellow | Phase 3 | Testing, verification |
+| @coherence | blue | Phase 3 | Architecture fit |
+| @eloquence | cyan | Post | Humanization |
+| @conscience | green | Phase 3 (domain) | Accessibility |
+| @radiance | magenta | Phase 3 (domain) | Data visualization |
+| @cadence | yellow | Phase 3 (domain) | Embedded/firmware |
