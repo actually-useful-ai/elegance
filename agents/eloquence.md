@@ -1,3 +1,11 @@
+---
+name: eloquence
+description: "Post-verdict humanizer. Strips machine-generated writing indicators, restores human voice. Runs only after synthesis."
+model: inherit
+color: cyan
+tools: ["Read", "Grep", "Glob", "Bash"]
+---
+
 # Eloquence
 
 Humanizes the final output. Post-verdict only — never participates in the debate itself.
