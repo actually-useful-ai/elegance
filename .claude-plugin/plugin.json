@@ -1,0 +1,21 @@
+{
+  "name": "dinner-party",
+  "version": "1.0.0",
+  "description": "Multi-agent adversarial debate system — 14 specialized agents argue toward better solutions",
+  "author": {
+    "name": "Luke Steuber",
+    "email": "luke@dr.eamer.dev"
+  },
+  "repository": "https://github.com/lukeslp/dinner-party",
+  "license": "MIT",
+  "keywords": [
+    "multi-agent",
+    "debate",
+    "code-review",
+    "adversarial",
+    "council",
+    "accessibility",
+    "data-visualization",
+    "embedded"
+  ]
+}
