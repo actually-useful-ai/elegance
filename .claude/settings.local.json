@@ -9,7 +9,11 @@
       "Bash(toilet -f mono9 \"VIGILANCE\")",
       "Bash(toilet -f future \"DEFIANCE\")",
       "Bash(toilet -f future \"GOVERNANCE\")",
-      "WebFetch(domain:patorjk.com)"
+      "WebFetch(domain:patorjk.com)",
+      "Bash(rm -rf ~/.claude/plugins/cache/lukeslp-elegance/)",
+      "Bash(mkdir -p ~/.claude/plugins/cache/lukeslp-elegance/elegance/2.0.0)",
+      "Bash(cp -r ~/.claude/plugins/marketplaces/lukeslp-elegance/* ~/.claude/plugins/cache/lukeslp-elegance/elegance/2.0.0/)",
+      "Bash(cp -r ~/.claude/plugins/marketplaces/lukeslp-elegance/.claude-plugin ~/.claude/plugins/cache/lukeslp-elegance/elegance/2.0.0/)"
     ]
   },
   "enableAllProjectMcpServers": true,
