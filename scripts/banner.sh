@@ -59,7 +59,7 @@ COLOR=$(get_color "$NAME")
 # Try pyfiglet first (571 fonts), then toilet, then figlet, then plain
 if python3 -c "import pyfiglet" 2>/dev/null; then
     printf "${COLOR}"
-    python3 -c "import pyfiglet; print(pyfiglet.figlet_format('$NAME', font='$FONT').rstrip())"
+    python3 -c "import sys,pyfiglet; print(pyfiglet.figlet_format(sys.argv[1], font=sys.argv[2]).rstrip())" "$NAME" "$FONT"
     printf "${RESET}"
 elif command -v toilet &>/dev/null; then
     printf "${COLOR}"
